@@ -44,7 +44,7 @@ app.get('/', function (req, res) {
     res.send("Hello World!");
 });
 
-app.use('/email', EmailRoutes);
+app.use('/api/email', EmailRoutes);
 
 //---Listening for Mail sever----
 server.listen(80, () => {
