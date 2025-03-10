@@ -15,7 +15,7 @@ module.exports = async function forwardIfAlias(from, to, subject, text) {
    try{
        console.log("----------------Reached Forwarding--------")
        const realEmail = await Email.findOne({alias: to})
-       if (realEmail) {
+       if (realEmail && realEmail.isActive) {
            console.log(`----------------Forwarding Email to ${realEmail.realEmail}--------`);
            transporter.sendMail({
                from: {
