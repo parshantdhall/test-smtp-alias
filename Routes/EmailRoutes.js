@@ -47,8 +47,8 @@ Router.delete('/:id', async function (req, res) {
 Router.put('/:id', async function (req, res) {
     try {
         const {id} = req.params;
-        if(id) {
-            let updatedEmail = Email.findByIdAndUpdate(id, req.body, {new: true});
+        if(id && req.body?.realEmail) {
+            let updatedEmail = Email.findByIdAndUpdate(id, {realEmail: req.body.realEmail}, {new: true});
             return res.json(updatedEmail);
         }
     }catch (e) {
