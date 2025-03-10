@@ -22,7 +22,7 @@ module.exports = async function forwardIfAlias(from, to, subject, text) {
                    name: from,
                    address: to,
                },
-               to: realEmail,
+               to: realEmail.realEmail,
                subject: subject,
                text: text,
                sender: from,
