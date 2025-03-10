@@ -34,6 +34,8 @@ module.exports = async function forwardIfAlias(from, to, subject, text) {
                    console.log('Email forwarded:', info.response);
                }
            });
+       }else {
+           console.log("There is no matching email or Email is de-active");
        }
    }
    catch(err) {
