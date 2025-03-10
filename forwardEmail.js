@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const Email = require('./models/email');
+const Email = require('./models/Email');
 
 const transporter = nodemailer.createTransport({
     host: 'mail.smtp2go.com',
