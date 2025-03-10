@@ -5,6 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const EmailRoutes = require('./Routes/EmailRoutes');
+require('dotenv').config(); //setting up env vars
 
 //express server config
 const app = express();
