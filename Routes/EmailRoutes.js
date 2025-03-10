@@ -48,7 +48,7 @@ Router.put('/:id', async function (req, res) {
     try {
         const {id} = req.params;
         if(id && req.body?.realEmail) {
-            let updatedEmail = Email.findByIdAndUpdate(id, {realEmail: req.body.realEmail}, {new: true});
+            let updatedEmail = await Email.findByIdAndUpdate(id, {realEmail: req.body.realEmail}, {new: true});
             return res.json(updatedEmail);
         }
     }catch (e) {
