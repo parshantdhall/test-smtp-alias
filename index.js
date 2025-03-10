@@ -11,7 +11,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+}));
 app.use(express.urlencoded({ extended: false }));
 //mongoDB configs
 const uri = "mongodb+srv://parshantdhall:JalplZt8tWmGln9K@emailforwarder.zsmmk.mongodb.net/EmailDB?retryWrites=true&w=majority&appName=EmailForwarder";
