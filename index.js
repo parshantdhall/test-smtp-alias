@@ -4,7 +4,7 @@ const forwardIfAlias = require('./forwardEmail');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const EmailRoutes = require('./routes/EmailRoutes');
+const EmailRoutes = require('./Routes/EmailRoutes');
 
 //express server config
 const app = express();
