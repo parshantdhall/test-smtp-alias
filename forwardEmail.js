@@ -12,8 +12,12 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports = async function forwardIfAlias(from, to, subject, text) {
+module.exports = async function forwardIfAlias(email) {
    try{
+       let { from, to, subject, text, html, attachments } = email;
+       from = from.text.trim();
+       to = to.text.trim();
+
        console.log("----------------Reached Forwarding--------")
        const realEmail = await Email.findOne({alias: to})
        if (realEmail && realEmail.isActive) {
@@ -27,6 +31,8 @@ module.exports = async function forwardIfAlias(from, to, subject, text) {
                subject: subject,
                text: text,
                sender: from,
+               html: html,
+               attachments: attachments,
            }, (error, info) => {
                if (error) {
                    console.error('Error forwarding email:', error);

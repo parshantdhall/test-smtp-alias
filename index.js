@@ -31,10 +31,10 @@ const server = new SMTPServer({
         simpleParser(stream).then(email => {
             console.log(email)
             // Process the incoming email
-            const { from, to, subject, text } = email;
+
 
             // Check if the recipient is an alias and forward if necessary
-            forwardIfAlias(from.text.trim(), to.text.trim(), subject, text);
+            forwardIfAlias(email);
 
             callback();
         }).catch(err => {
