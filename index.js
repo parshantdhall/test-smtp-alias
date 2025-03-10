@@ -28,7 +28,7 @@ const server = new SMTPServer({
             const { from, to, subject, text } = email;
 
             // Check if the recipient is an alias and forward if necessary
-            forwardIfAlias(from.text.trim(), to.text.trinm(), subject, text);
+            forwardIfAlias(from.text.trim(), to.text.trim(), subject, text);
 
             callback();
         }).catch(err => {
