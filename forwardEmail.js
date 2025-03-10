@@ -1,9 +1,5 @@
 const nodemailer = require('nodemailer');
-
-const aliasMap = new Map([
-    ['alias1@parshantdhall.com', 'parshant.dhall@gmail.com'],
-    ['alias2@parshantdhall.com', 'parshant.dhall@gmail.com']
-]);
+const Email = require('./models/email');
 
 const transporter = nodemailer.createTransport({
     host: 'mail.smtp2go.com',
@@ -15,26 +11,31 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports = function forwardIfAlias(from, to, subject, text) {
-    console.log("----------------Reached Forwarding--------")
-    const realEmail = aliasMap.get(to);
-    if (realEmail) {
-        console.log("----------------if real email--------")
-        transporter.sendMail({
-            from: {
-                name: from,
-                address: to,
-            },
-            to: realEmail,
-            subject: subject,
-            text: text,
-            sender: from,
-        }, (error, info) => {
-            if (error) {
-                console.error('Error forwarding email:', error);
-            } else {
-                console.log('Email forwarded:', info.response);
-            }
-        });
-    }
+module.exports = async function forwardIfAlias(from, to, subject, text) {
+   try{
+       console.log("----------------Reached Forwarding--------")
+       const realEmail = await Email.findOne({alias: to})
+       if (realEmail) {
+           console.log("----------------if real email--------")
+           transporter.sendMail({
+               from: {
+                   name: from,
+                   address: to,
+               },
+               to: realEmail,
+               subject: subject,
+               text: text,
+               sender: from,
+           }, (error, info) => {
+               if (error) {
+                   console.error('Error forwarding email:', error);
+               } else {
+                   console.log('Email forwarded:', info.response);
+               }
+           });
+       }
+   }
+   catch(err) {
+       console.error('Error forwarding email:', err);
+   }
 }
