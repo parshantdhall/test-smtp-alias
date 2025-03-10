@@ -16,13 +16,19 @@ const transporter = nodemailer.createTransport({
 });
 
 module.exports = function forwardIfAlias(from, to, subject, text) {
+    console.log("----------------Reached Forwarding--------")
     const realEmail = aliasMap.get(to);
     if (realEmail) {
+        console.log("----------------if real email--------")
         transporter.sendMail({
-            from: from,
+            from: {
+                name: from,
+                address: to,
+            },
             to: realEmail,
             subject: subject,
-            text: text
+            text: text,
+            sender: from,
         }, (error, info) => {
             if (error) {
                 console.error('Error forwarding email:', error);
