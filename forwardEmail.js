@@ -1,13 +1,14 @@
 const nodemailer = require('nodemailer');
 const Email = require('./models/Email');
+const {pass, user} = require("./config");
 
 const transporter = nodemailer.createTransport({
     host: 'mail.smtp2go.com',
     port: 2525,
     secure: false,
     auth: {
-        user: process.env.USER,
-        pass: process.env.PASS
+        user: user,
+        pass: pass
     }
 });
 
